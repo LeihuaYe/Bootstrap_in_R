@@ -1,0 +1,61 @@
+---
+title: "Bootstrap"
+author: "Leihua Ye"
+date: "9/29/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#install.packages('boot',dep=TRUE)
+library(boot)
+
+mydata <- read.csv("Celtics_Heat_Game_6_Actual.csv")
+mydata
+```
+
+```{r}
+cor(mydata$X.Drafted,mydata$FPTS)
+```
+
+# Bootstrap the correlation between drafted and fantasy points 
+# step 1: define a function that calculates the metric of interest 
+```{r}
+function_1 <- function(data, i){
+	d2 <- data[i,] # for every row in the dataset
+	return(cor(d2$X.Drafted, d2$FPTS))# calculate the correlationship between X.Drafted and FPTS
+}
+```
+
+# step 2: fill in the dataset name, function, and the number oof bootstrap samples to be drawn 
+```{r}
+set.seed(1)
+bootstrap_correlation <- boot(mydata,function_1,R=10000)
+bootstrap_correlation
+```
+
+```{r}
+summary(bootstrap_correlation)
+```
+t0: the observed values of k statistics applied to the original data 
+t: An R*K matrix where each row is a bootstrap relicate of the k statistics
+
+```{r}
+range(bootstrap_correlation$t)
+```
+
+```{r}
+mean(bootstrap_correlation$t)
+```
+
+
+```{r}
+sd(bootstrap_correlation$t)
+```
+```{r}
+class(bootstrap_correlation)
+```
+```{r}
+boot.ci(boot.out=bootstrap_correlation,type=c('norm','basic','perc','bca'))
+```
+Four 95% confidence intervals are presented: normal, basic, percentile, and bias-corrected and accelerated. A fifth type, the studentized intervals, requires variances from each bootstrap sample.
