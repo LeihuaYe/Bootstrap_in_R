@@ -1,4 +1,6 @@
-# Project Summary: Bootstrap in R
+# Bootstrap in R
+
+# Project Summary
 
 This repository hosts the R code and data file for bootstrapping. With a finite number of samples, the bootstrap method comes in handy and provides valid inferences about the population distribution. However, there are several pitfalls that beginners often fail to account for. 
 
