@@ -11,9 +11,13 @@ This project is conducted in the R environment, and you have to pre-install the 
 ## What is the data?
 
 This dataset is the last post-season game between two NBA teams -- Celtics and Heat -- at DraftKings. The dataset contains four variables: Player, Roster Position, %Drafted, and FPTS.
+
 Player: NBA players' names
+
 Roster Position: the position the player held in the DraftKings lineups, whether as Captain (CPT) or Utility (UTIL). DraftKings has a 1.5 multiplication power over the captain. 
+
 %Drafted: the percentage of people drafted this player
+
 FPTS: Fantasy Points 
 
 This project focuses on the last two variables -- %Drafted and FPTS -- and tries to understand how strongly they correlate with repeated samplings.
